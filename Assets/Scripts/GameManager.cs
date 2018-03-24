@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 		//Call InitGame to initialize our level.
 		InitGame();
 
-        boardScript.BoardSetup();
+        
 	}
 	
 	//Initializes the game for each level.
@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour
 	{
 		//Clear any Enemy objects in our List to prepare for next level.
 		enemies.Clear();
-	}
+
+        boardScript.BoardSetup();
+    }
 	
 	//Update is called every frame.
 	void Update()
