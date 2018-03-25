@@ -101,4 +101,9 @@ public class GameManager : MonoBehaviour
 		//Enemies are done moving, set enemiesMoving to false.
 		enemiesMoving = false;
 	}
+
+    public void updateBoard(int horizantal, int vertical) 
+    {
+        boardScript.addToBoard(horizantal, vertical);
+    }
 }
