@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public bool playersTurn = true;		//Boolean to check if it's players turn, hidden in inspector but public.
 
     private BoardManager boardScript;
-	private List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
+    private DungeonManager dungeonScript;
+    private Player playerScript;
+
+    private List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
 	private bool enemiesMoving;								//Boolean to check if enemies are moving.
 
 	//Awake is always called before any Start functions
@@ -37,7 +40,9 @@ public class GameManager : MonoBehaviour
 		enemies = new List<Enemy>();
 
         boardScript = GetComponent<BoardManager>();
-		
+        dungeonScript = GetComponent<DungeonManager>();
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
 		//Call the InitGame function to initialize the first level 
 		InitGame();
 	}
@@ -48,7 +53,6 @@ public class GameManager : MonoBehaviour
 		//Call InitGame to initialize our level.
 		InitGame();
 
-        
 	}
 	
 	//Initializes the game for each level.
@@ -105,5 +109,18 @@ public class GameManager : MonoBehaviour
     public void updateBoard(int horizantal, int vertical) 
     {
         boardScript.addToBoard(horizantal, vertical);
+    }
+
+    public void enterDungeon()
+    {
+        dungeonScript.StartDungeon();
+        boardScript.SetDungeonBoard(dungeonScript.gridPositions, dungeonScript.maxBound, dungeonScript.endPos);
+        playerScript.dungeonTransition = false;
+    }
+
+    public void exitDungeon()
+    {
+        boardScript.SetWorldBoard();
+        playerScript.dungeonTransition = false;
     }
 }
