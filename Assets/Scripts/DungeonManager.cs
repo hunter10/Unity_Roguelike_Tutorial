@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public enum TileType
 {
-    essential, random, empty
+    essential, random, empty, chest
 }
 
 public class DungeonManager : MonoBehaviour
@@ -141,7 +141,7 @@ public class DungeonManager : MonoBehaviour
 
     private void BuildRandomChamber(PathTile tile)
     {
-        int chamberSize = 3,
+        int chamberSize = 3, 
         adjacentTileCount = tile.adjacentPathTiles.Count,
         randomIndex = Random.Range(0, adjacentTileCount);
         Vector2 chamberOrigin = tile.adjacentPathTiles[randomIndex];
@@ -151,23 +151,14 @@ public class DungeonManager : MonoBehaviour
             for (int y = (int)chamberOrigin.y; y < chamberOrigin.y + chamberSize; y++)
             {
                 Vector2 chamberTilePos = new Vector2(x, y);
-                if (!gridPositions.ContainsKey(chamberTilePos) && chamberTilePos.x < maxBound && chamberTilePos.x > 0 && chamberTilePos.y < maxBound && chamberTilePos.y > 0)
-
-                    gridPositions.Add(chamberTilePos, TileType.empty);
+				if (!gridPositions.ContainsKey (chamberTilePos) && chamberTilePos.x < maxBound && chamberTilePos.x > 0 && chamberTilePos.y < maxBound && chamberTilePos.y > 0)
+				if (Random.Range (0, 10) == 1) {
+					gridPositions.Add (chamberTilePos, TileType.chest);
+				} else {
+					gridPositions.Add (chamberTilePos, TileType.empty);
+				}
             }
         }
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
 

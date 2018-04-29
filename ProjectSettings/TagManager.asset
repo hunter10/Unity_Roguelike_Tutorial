@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Exit
+  - Food
+  - Soda
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - BlockingLayer
   - Floor
   - Units
-  - 
+  - Items
   - 
   - 
   - 
